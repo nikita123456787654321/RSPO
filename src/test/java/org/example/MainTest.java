@@ -73,7 +73,7 @@ class MainTest {
         String[] args = {inputFile.toString(), "-o", outputDir.toString(), "-f"};
         Main.main(args);
 
-        // Capture console output
+
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
