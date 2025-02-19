@@ -58,18 +58,21 @@ class DataProcessor {
         List<Object> dataList = this.dataList;
 
         if (line.matches("^-?\\d+$")) {
-            int num = Integer.parseInt(line);
-            integers.add(num);
-            intCount++;
-            dataList.add(num);
-            updateStats(num);
-        } else if (line.matches("^-?\\d+[lL]?$")) {
-            long num = Long.parseLong(line.replaceAll("[lL]$", ""));
-            longs.add(num);
-            longCount++;
-            dataList.add(num);
-            updateStats(num);
-        } else if (line.matches("^-?\\d*\\.\\d+$")) {
+            try {
+                int num = Integer.parseInt(line);
+                integers.add(num);
+                intCount++;
+                dataList.add(num);
+                updateStats(num);
+            } catch (NumberFormatException e) {
+                long num = Long.parseLong(line);
+                longs.add(num);
+                longCount++;
+                dataList.add(num);
+                updateStats(num);
+            }
+        }
+        else if (line.matches("^-?\\d*\\.\\d+$")) {
             double num = Double.parseDouble(line);
             doubles.add(num);
             doubleCount++;
