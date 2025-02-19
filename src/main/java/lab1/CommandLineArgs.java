@@ -17,7 +17,7 @@ class CommandLineArgs {
                 case "-o":
                     outputPath = args[++i];
                     break;
-                case "-r":
+                case "-p":
                     prefix = args[++i];
                     break;
                 case "-a":
@@ -26,7 +26,7 @@ class CommandLineArgs {
                 case "-s":
                     shortStats = true;
                     break;
-                case "-#":
+                case "-f":
                     fullStats = true;
                     break;
                 default:

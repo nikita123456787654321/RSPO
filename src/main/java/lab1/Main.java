@@ -1,44 +1,26 @@
 package lab1;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Starting file generation with random objects...");
+        Scanner scanner = new Scanner(System.in);
 
-        int THREAD_COUNT = 2;
-        int TOTAL_OBJECTS = 1000;
-        String FILENAME = "test.txt";
+        System.out.print("Are you want to create new file with data? (y/n): ");
+        String answer1 = scanner.next();
 
-        // Создаем и запускаем потоки
-        for (int i = 0; i < THREAD_COUNT; i++) {
-            new MultiThreadProcessor.RandomObjectWriter(TOTAL_OBJECTS / THREAD_COUNT, FILENAME, i).start();
+        List<String> inputFiles = new ArrayList<>();
+
+        if (answer1.equals("y")) {
+            StartFileCreating.startCreating(scanner, inputFiles);
         }
 
-        try {
-            System.out.println("startRun");
-
-            CommandLineArgs commandLineArgs = new CommandLineArgs(args);
-            DataProcessor dataProcessor = new DataProcessor(commandLineArgs);
-            List<String> filenames = commandLineArgs.getInputFiles();
-
-            for (String filename : filenames) {
-                try {
-                    System.out.println("Setting filename: " + filename);
-                    dataProcessor.setFilename(filename);
-                    System.out.println("Run processFile");
-                    dataProcessor.processFile();
-                } catch (Exception e) {
-                    System.out.println("Error uploading file " + filename + ": " + e.getMessage());
-                }
-            }
-
-            dataProcessor.printStatistics(commandLineArgs);
-            dataProcessor.writeResults();
-
-        } catch (Exception e) {
-            System.out.println("Error during file write: " + e.getMessage());
+        if (answer1.equals("n") || !inputFiles.isEmpty()) {
+            StartFileProcess.start(inputFiles, args);
         }
+
+        scanner.close();
     }
 }

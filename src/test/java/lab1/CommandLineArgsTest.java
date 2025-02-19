@@ -7,7 +7,7 @@ class CommandLineArgsTest {
 
     @Test
     void testParseArguments() {
-        String[] args = {"file1.txt", "file2.txt", "-o", "/output", "-r", "prefix_", "-a", "-s"};
+        String[] args = {"file1.txt", "file2.txt", "-o", "/output", "-p", "prefix_", "-a", "-s"};
         CommandLineArgs commandLineArgs = new CommandLineArgs(args);
 
         assertEquals(2, commandLineArgs.getInputFiles().size());

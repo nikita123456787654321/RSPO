@@ -60,7 +60,7 @@ class DataProcessorTest {
 
     @Test
     void testWriteResults() throws IOException {
-        CommandLineArgs commandLineArgs = new CommandLineArgs(new String[]{"-o", "src/", "-r", "prefix_"});
+        CommandLineArgs commandLineArgs = new CommandLineArgs(new String[]{"-o", "src/", "-p", "prefix_"});
         DataProcessor dataProcessor = new DataProcessor(commandLineArgs);
 
         // Создаем тестовые данные
