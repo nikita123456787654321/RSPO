@@ -128,13 +128,17 @@ class DataProcessor {
 
     private <T> void writeFile(String fileName, List<T> data) throws IOException {
         String filePath = commandLineArgs.getOutputPath() + commandLineArgs.getPrefix() + fileName;
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, commandLineArgs.isAppend()))) {
+        boolean append = commandLineArgs.isAppend(); // проверяем флаг -a
+
+        // Если append == false, то перезаписываем файл
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, append))) {
             for (T item : data) {
                 writer.write(item.toString());
                 writer.newLine();
             }
         }
     }
+
 
     public void setFilename(String filename) { this.filename = filename; }
     public List<Object> getDataList() { return this.dataList; }
